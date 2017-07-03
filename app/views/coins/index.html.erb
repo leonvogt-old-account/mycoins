@@ -1,0 +1,33 @@
+<h1>All Available Coins</h1>
+<%= link_to "Buy Coins", coins_buy_path, class: "btn btn-primary"%>
+
+<table class="table">
+  <thead>
+    <td>Id</td>
+    <td>Name</td>
+    <td>Website</td>
+    <td>Price_btc</td>
+    <td>Volume_btc</td>
+  </thead>
+
+  <tbody>
+  <% allCoins = CryptocoinchartsApi::Client.new %>
+  <% allCoins.list_coins.each do |coindata| %>
+  <% @coin = Coin.new %>
+    <tr>
+      <% counter = 0 %>
+      <% coindata.each do |data| %>
+        <td>
+        <%= data[0] %>->
+        <%= data[1] %>
+        </td>
+        <% unless counter == 0 %>
+          <% @coin[data[0]]=data[1] %>
+        <% end %>
+        <% counter += 1 %>
+      <% end %>
+    </tr>
+    <% @coin.save %>
+  <% end %>
+  </tbody>
+</table>

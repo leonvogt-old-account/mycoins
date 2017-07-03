@@ -1,0 +1,50 @@
+<div class="container">
+<h1>Transaktionen</h1>
+<%= simple_form_for :handel, url: coin_create_path do |f| %>
+  <table class="table">
+    <thead>
+      <td>Gekauft</td>
+      <td>Datum</td>
+      <td>Anzahl</td>
+      <td>Preis</td>
+      <td>Bezahlt mit</td>
+      <td></td>
+    </thead>
+
+    <tbody>
+      <td>
+        <div class="ui-widget">
+          <%=  f.input :coin, :url => autocomplete_coin_name_coins_path, :as => :autocomplete, label:false, placeholder: 'Welcher Coin' %>
+        </div>
+      </td>
+      <td>
+        <%= f.input :date, input_html: {class: 'datepicker'}, label:false, placeholder: 'Wann gekauft' %>
+      </td>
+      <td>
+        <%= f.input :number_of_coins, placeholder: 'Anzahl', label:false %>
+      </td>
+      <td>
+        <%= f.input :price_of_coin, placeholder: 'Preis', label:false %>
+      </td>
+      <td>
+        <select class="form-control">
+          <optgroup>
+            <option value="usd">USD</option>
+            <option value="chf">CHF</option>
+            <option value="eur">EUR</option>
+          </optgroup>
+          <optgroup>
+            <option value="btc">btc</option>
+            <option value="eth">eth</option>
+            <option value="ltc">ltc</option>
+          </optgroup>
+        </select>
+      </td>
+      <td>
+        <%= f.button :submit, value: 'Eintragen', class: 'btn btn-success' %>
+      </td>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to "Home", root_path, class: 'btn btn-primary' %>
+</div>

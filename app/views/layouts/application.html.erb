@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mycoins</title>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script>
+  <%= stylesheet_link_tag    'navbar.css' %>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag "autocomplete-rails.js" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <% if user_signed_in? %>
+    <%= render 'layouts/nav' %>
+  <% end %>
+
+  <div class="container-fluid">
+    <%= yield %>
+  </div>
+
+</body>
+</html>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker({
+       format: 'dd.mm.yyyy',
+       todayHighlight: true,
+       todayBtn: "linked"
+    });
+  });
+</script>
+
+<script>
+$(function() {
+  $('a#show_transactionDiv').click(function(event){
+    event.preventDefault();
+    $('div#transactionDiv').toggle();
+  });
+  $('a#show_loginDiv').click(function(event){
+    event.preventDefault();
+    $('div#login-div').toggle();
+  });
+});
+</script>

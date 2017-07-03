@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: MyString
+  name: MyString
+  website: MyString
+  price_btc: 
+  volume_btc: 
+
+two:
+  id: MyString
+  name: MyString
+  website: MyString
+  price_btc: 
+  volume_btc: 

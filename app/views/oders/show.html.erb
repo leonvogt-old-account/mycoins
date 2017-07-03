@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @oder.user %>
+</p>
+
+<p>
+  <strong>Coin:</strong>
+  <%= @oder.coin %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @oder.date %>
+</p>
+
+<p>
+  <strong>Number of coins:</strong>
+  <%= @oder.number_of_coins %>
+</p>
+
+<p>
+  <strong>Price of coin:</strong>
+  <%= @oder.price_of_coin %>
+</p>
+
+<p>
+  <strong>Payed with:</strong>
+  <%= @oder.payed_with %>
+</p>
+
+<%= link_to 'Edit', edit_oder_path(@oder) %> |
+<%= link_to 'Back', oders_path %>

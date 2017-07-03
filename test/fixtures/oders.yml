@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  coin: MyString
+  date: 2017-07-01
+  number_of_coins: 
+  price_of_coin: 
+  payed_with: MyString
+
+two:
+  user_id: 
+  coin: MyString
+  date: 2017-07-01
+  number_of_coins: 
+  price_of_coin: 
+  payed_with: MyString

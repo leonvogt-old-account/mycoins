@@ -1,0 +1,23 @@
+<% require 'open-uri' %>
+<h1>All Available Coins on CoinCap
+<%= link_to "Buy Coins", coins_buy_path, class: "btn btn-primary"%>
+</h1>
+
+<table class="table">
+  <thead>
+    <td>Name</td>
+    <td>Website</td>
+    <td>Price_btc</td>
+    <td>Volume_btc</td>
+  </thead>
+
+  <tbody>
+
+    <% @allcoins.each do |f| %>
+    <tr>
+      <td><%= f.name %></td>
+    </tr>
+    <% end %>
+
+  </tbody>
+</table>

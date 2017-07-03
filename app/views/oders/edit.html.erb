@@ -1,0 +1,84 @@
+<% require 'open-uri' %>
+<%= simple_form_for(@oder) do |f| %>
+<%= f.error_notification %>
+<% coinURL = "https://api.coinmarketcap.com/v1/ticker/#{@oder.coin}/" %>
+<% coinInfo = open(coinURL).read %>
+<% coinInfoArray = JSON.parse(coinInfo) %>
+<% coinInfoArray.each do |data| %>
+  <% @rank = data["rank"] %>
+  <% @price_usd = data["price_usd"] %>
+  <% @price_btc = data["price_btc"] %>
+  <% @volume_usd_24h = data["24h_volume_usd"] %>
+  <% @percent_change_1h = data["percent_change_1h"] %>
+  <% @percent_change_24h = data["percent_change_24h"] %>
+  <% @percent_change_7d = data["percent_change_7d"] %>
+<% end %>
+<div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted"><%= @oder.coin %></h3>
+      </div>
+
+      <div class="jumbotron">
+        <h2 class="display-4">33Tage und 45% <span style="color: green;">Gewinn</span></h2>
+        <p class="lead">
+          <h4 class="display-5" style="text-align: left;">Edit</h4>
+          <div class="form-inputs">
+            <div class="ui-widget">
+              <%=  f.input :coin, :url => autocomplete_coin_name_coins_path, :as => :autocomplete, label:false %>
+            </div>
+            <%= f.input :datum, input_html: {class: 'datepicker'}, label:false %>
+            <%= f.input :number_of_coins %>
+            <%= f.input :price_of_coin %>
+            <%= f.input :payed_with %>
+          </div>
+
+          <div class="form-actions">
+            <%= f.button :submit, class: 'btn btn-primary' %>
+            <%= link_to 'Go Back', oders_path, class: 'btn btn-default' %>
+          </div>
+          <%= link_to 'Delete', @oder, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+        </p>
+      </div>
+
+
+
+      <div class="row marketing">
+        <h3 class="text-muted"><%= @oder.coin %> Info</h3>
+        <p><%# Time.now %></p>
+        <br>
+        <div class="col-lg-6">
+          <h4>1 <%= @oder.coin %> to USD</h4>
+          <p><%= @price_usd %> $</p>
+
+          <h4>1 <%= @oder.coin %> to BTC</h4>
+          <p><%= @price_btc %> btc</p>
+
+          <h4>24H Stunde Volume USD</h4>
+          <p><%= @volume_usd_24h %> $</p>
+        </div>
+
+        <div class="col-lg-6">
+          <h4>1H Change</h4>
+          <p><%= @percent_change_1h %> %</p>
+
+          <h4>24H Change</h4>
+          <p><%= @percent_change_24h %> %</p>
+
+          <h4>7D Change</h4>
+          <p><%= @percent_change_7d %> %</p>
+        </div>
+      </div>
+      <br>
+
+      <footer class="footer">
+        <p>&copy; MyCoin 2017</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+<% end %>

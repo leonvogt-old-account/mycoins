@@ -1,0 +1,29 @@
+<h1>All Available Coins on CoinMarketCap
+<%= link_to "Go Back", root_path, class: "btn btn-primary"%>
+</h1>
+
+<table class="table">
+  <thead>
+    <td>Id</td>
+    <td>Name</td>
+    <td>symbol</td>
+    <td>Price USD</td>
+    <td>Price BTC</td>
+    <td>Change 24h %</td>
+  </thead>
+
+  <tbody>
+    <% counter = 0 %>
+    <% @allcoins.each do |f| %>
+    <% counter += 1 %>
+    <tr>
+      <td><%= counter %></td>
+      <td><%= f.name %></td>
+      <td><%= f.symbol %></td>
+      <td><%= f.price_usd %></td>
+      <td><%= f.price_btc %></td>
+      <td><%= f.percent_change_24h %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,15 @@
+<%= simple_form_for(@oder) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :coin %>
+    <%= f.input :date %>
+    <%= f.input :number_of_coins %>
+    <%= f.input :price_of_coin %>
+    <%= f.input :payed_with %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

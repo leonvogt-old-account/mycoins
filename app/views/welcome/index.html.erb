@@ -1,0 +1,108 @@
+<%= stylesheet_link_tag "welcome.css" %>
+<div class="jumbotron">
+  <h1>Welcome To MyCoin</h1>
+  <%= link_to "Tätige eine Transaktion", "#", id: "show_transactionDiv", class: "btn btn-primary" %>
+</div>
+
+<div id="transactionDiv" >
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-10">
+    <%= render 'transaction' %>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+
+<div class="col-md-6">
+  <script type="text/javascript">
+    crypt_single_base_currency = "Bitcoin (BTC)";crypt_single_target_currency = "US Dollar (USD)";
+  </script>
+  <script type="text/javascript" src="https://www.cryptonator.com/ui/js/widget/single_widget.js"></script>
+</div>
+
+<div class="col-md-6">
+  <script type="text/javascript" src="https://www.cryptonator.com/ui/js/widget/calc_widget.js"></script>
+</div>
+
+
+
+
+
+<div class="col-md-12">
+  <h3>Meine Transaktionen</h3>
+  <table class="table table-hover" id="transactionTable">
+    <thead class="thead-inverse">
+      <td>Coin</td>
+      <td>Datum</td>
+      <td>Anzahl</td>
+      <td>Preis</td>
+      <td>Gezahlt</td>
+      <td>Wert Momentan</td>
+      <td>Rendite</td>
+    </thead>
+
+    <tbody>
+      <% @oders.each do |f| %>
+      <% number_of_coins = f.number_of_coins %>
+      <% price_of_coin = f.price_of_coin %>
+      <% coinInfo = Coin.find_by_name(f.coin) %>
+      <% gezahlt = number_of_coins*price_of_coin %>
+      <% wertNow = coinInfo.price_usd*number_of_coins %>
+      <% rendite = 100 / gezahlt * wertNow %>
+      <% renditeSum = wertNow - gezahlt %>
+      <tr>
+        <td><%= link_to "#{f.coin}", edit_oder_path(f), stlye: 'color: black;' %></td>
+        <td><%= f.date %></td>
+        <td><span class="badge" style="color: #5cb85c"><%= f.number_of_coins %></span></td>
+        <td><%= f.price_of_coin.round(2) %></td>
+        <td><%= gezahlt.round(2) %></td>
+        <td><%= wertNow.round(2) %></td>
+        <!-- <td><%= f.date %></td>
+        <td><%= f.number_of_coins %></td>
+        <td><%= f.price_of_coin.round(2) %> $</td>
+        <td><%= gezahlt.round(2) %> $</td>
+        <td><%= wertNow.round(2) %> $</td> -->
+        <td><h4>
+          <% if renditeSum >= 0 %>
+            <span class="label label-success" style="color: black;">
+          <% else %>
+            <span class="label label-danger" style="color: black;">
+          <% end %>
+          <%= rendite.round(2) %>% (<%= renditeSum.round(2) %>.-)</span></h4>
+        </td>
+        <td>
+          <%= link_to edit_oder_path(f) do %>
+            <span class="glyphicon glyphicon-log-in"></span>
+          <% end %>
+        </td>
+        <td><%# link_to "Bearbeiten", edit_oder_path(f), class: "btn btn-default" %></td>
+
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+    <% arr = ["progress-bar-success", "progress-bar-info", "progress-bar-warning", "progress-bar-danger"] %>
+    <% @oders.each do |f| %>
+    <% random = rand(0...4) %>
+    <% number_of_coins = f.number_of_coins %>
+    <% price_of_coin = f.price_of_coin %>
+    <% coinInfo = Coin.find_by_name(f.coin) %>
+    <% gezahlt = number_of_coins*price_of_coin %>
+    <% wertNow = coinInfo.price_usd*number_of_coins %>
+    <% rendite = 100 / gezahlt * wertNow %>
+    <% rendite = rendite.round(2) %>
+    <% renditeSum = wertNow - gezahlt %>
+
+      <div class="progress">
+          <div class="progress-bar <%= arr[random] %>" role="progressbar" aria-valuenow="<%= rendite %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= rendite %>%;">
+              <span class="sr-only"><%= rendite %>% Complete</span>
+          </div>
+          <span class="progress-type">f.coin</span>
+          <span class="progress-completed"><%= rendite %>%</span>
+      </div>
+    <% end %>
+
+
+</div>

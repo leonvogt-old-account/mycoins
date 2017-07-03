@@ -1,0 +1,42 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-3">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="<%= root_path %>">MyCoins</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="navbar-collapse-3">
+        <ul class="nav navbar-nav navbar-left" style="margin-top: 1em;">
+          <li><a class="nav-item nav-link" href="<%= root_path %>">Dashboard <span class="sr-only">(current)</span></a></li>
+          <li><a class="nav-item nav-link" href="<%= coins_coinmarketcap_path %>">All Coins</a></li>
+          <li><a class="nav-item nav-link" href="#">My Perfomance</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <a class="btn btn-default btn-outline btn-circle collapsed"  data-toggle="collapse" href="#nav-collapse3" aria-expanded="false" aria-controls="nav-collapse3">Search</a>
+          </li>
+          <li><%= link_to destroy_user_session_path, method: :delete  do %><%= "Abmelden" %><% end %></li>
+        </ul>
+        <div class="collapse nav navbar-nav nav-collapse slide-down" id="nav-collapse3">
+          <form class="navbar-form navbar-left" action="/coins/coinmarketcap" role="search">
+            <div class="form-group">
+              <%= simple_form_for :oder, url: coins_coinmarketcap_path do |f| %>
+              <%= f.error_notification %>
+                <div class="form-group">
+                  <%= f.input :coin, :url => autocomplete_coin_name_coins_path, :as => :autocomplete, label:false, placeholder: 'Tippe Coin ein:' %>
+                </div>
+                <%= button_tag "", type: "submit", class: "btn btn-primary glyphicon glyphicon-search" %>
+              <% end %>
+            </div>
+          </form>
+        </div>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>

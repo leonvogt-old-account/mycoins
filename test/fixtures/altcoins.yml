@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: 
+  website: MyString
+  price_btc: 9.99
+  volume_btc: 9.99
+
+two:
+  name: 
+  website: MyString
+  price_btc: 9.99
+  volume_btc: 9.99
